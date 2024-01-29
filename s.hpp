@@ -3,12 +3,9 @@ using namespace std;
 class Snake
 {
     array<int, 2> position = {0, 0}; // TODO:change to center
-    int length = 2;
-    vector<int> body;
+    int length;
+    vector<array<int, 2>> body;
     array<int, 2> direction = {0, 1}; // y,x
-    //{0 , 1}, {0, -1}
-    // {1, 0}, {-1, 0}
-    // valid {1, 0} {0, -1}
 
 public:
     void change_direction(array<int, 2> new_direction);
@@ -16,4 +13,5 @@ public:
     bool valid_direction(array<int, 2> new_direction);
     array<int, 2> get_head_position();
     Snake(array<int, 2> starting_position);
+    array<int, 2> move_head();
 };

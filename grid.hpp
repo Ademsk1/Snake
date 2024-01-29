@@ -1,10 +1,13 @@
 #include "s.hpp"
+using namespace std;
+
 class Grid
 {
-    int size;
+    int size = 8;
+    vector<int> row(8, 0);
+    vector<vector<int>> grid(8, vector<int>(8));
 
-    Grid(int size, Snake snake)
-    {
-        bool grid[size][size];
-        }
+public:
+    Grid(int size, Snake snake);
+    void print_grid();
 };
