@@ -3,21 +3,24 @@
 #include <thread>
 #include "s.hpp"
 #include "grid.hpp"
-
-using namespace std::this_thread; // sleep_for, sleep_until
-using namespace std::chrono;      // nanoseconds, system_clock, seconds
+#include <iostream>
+#include <chrono>
+#include <thread>
 using namespace std;
-
 int main()
 {
-    // declare size of arena
-    //
-    Grid game = Grid(10);
+
+    Snake snake = Snake({3, 3});
+    Grid grid = Grid(10, snake);
     bool continue_game = true;
 
     while (continue_game)
     {
-
-        sleep_until(system_clock::now() + seconds(1));
+        grid.print_grid();
+        snake.move_head();
+        std::cout << snake.get_head_position()[0] << ", " << snake.get_head_position()[1] << "\n";
+        grid.clear();
+        grid.draw(snake);
+        grid.print_grid();
     }
 }

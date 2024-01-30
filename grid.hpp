@@ -3,11 +3,12 @@ using namespace std;
 
 class Grid
 {
-    int size = 8;
-    vector<int> row(8, 0);
-    vector<vector<int>> grid(8, vector<int>(8));
+    int size;
+    vector<vector<bool>> grid;
 
 public:
-    Grid(int size, Snake snake);
+    Grid(int size, Snake &snake);
     void print_grid();
+    void clear();
+    void draw(Snake &snake);
 };

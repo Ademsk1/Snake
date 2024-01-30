@@ -1,12 +1,12 @@
 #include "s.hpp"
-
-Snake::Snake(array<int, 2> starting_position)
+#include <iostream>
+Snake::Snake(vector<int> starting_position)
 {
     position = starting_position;
     length = 2;
 };
 
-void Snake::change_direction(array<int, 2> new_direction)
+void Snake::change_direction(vector<int> new_direction)
 {
     if (direction[0] * new_direction[0] || direction[1] * new_direction[1])
     {
@@ -15,20 +15,22 @@ void Snake::change_direction(array<int, 2> new_direction)
     direction = new_direction;
 }
 
-std::array<int, 2> Snake::get_direction()
+vector<int> Snake::get_direction()
 {
     return direction;
 }
 
-std::array<int, 2> Snake::get_head_position()
+vector<int> Snake::get_head_position()
 {
     return position;
 }
 
-array<int, 2> Snake::move_head()
+vector<int> Snake::move_head()
 {
-    for (int i; i < 2; i++)
-    {
-        position[i] += direction[i];
-    }
+    std::cout << "Old head position" << position[0] << ", " << position[1] << "\n";
+    std::cout << "Old head direction" << direction[0] << ", " << direction[1] << "\n";
+    position[0] += direction[0];
+    position[1] += direction[1];
+
+    std::cout << "New head position: " << position[0] << ", " << position[1] << "\n";
 }
