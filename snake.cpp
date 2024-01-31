@@ -7,23 +7,56 @@
 
 using namespace std;
 
-int main()
+void ClearScreen()
 {
+    COORD cursorPosition;
+    cursorPosition.X = 0;
+    cursorPosition.Y = 0;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursorPosition);
+}
+
+bool Game()
+{
+    string play_again;
     srand(time(NULL));
     Grid grid = Grid(10);
+    int difficulty;
     Snake snake = Snake({3, 3}, 10);
     grid.place_cherry(snake.body);
+    cout << "Welcome to Snake!\n\n";
+    cout << "Input difficulty:\n(1) Easy\n(2) Normal \n(3) Hard\n";
+    cin >> difficulty;
+    int time_difficulty = 300 / difficulty;
     bool continue_game = true;
+    system("cls");
     while (continue_game)
     {
-        system("cls");
+        ClearScreen();
         snake.check_user_input();
         snake.move();
         grid.check_if_eaten(snake);
         grid.draw(snake.body);
         grid.print_grid();
-        Sleep(500);
+        Sleep(time_difficulty);
         grid.clear();
         continue_game = snake.eat_self();
+    }
+    system("cls");
+    cout << "You Lost!\n\n Your score: " << grid.get_score() << "\n";
+    cout << "Would you like to play again? (y/n): ";
+    cin >> play_again;
+    cout << "\n";
+    if (play_again == "y")
+    {
+        return true;
+    }
+    return false;
+}
+int main()
+{
+    bool play_again = true;
+    while (play_again)
+    {
+        play_again = Game();
     }
 }

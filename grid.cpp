@@ -51,12 +51,18 @@ void Grid::draw(vector<vector<int>> body)
     }
 }
 
+int Grid::get_score()
+{
+    return score;
+}
+
 void Grid::check_if_eaten(Snake &snake)
 {
     if (snake.body[0][0] == icherry & snake.body[0][1] == jcherry)
     {
         place_cherry(snake.body);
         snake.eat(icherry, jcherry);
+        score++;
     }
 }
 

@@ -5,6 +5,7 @@ using namespace std;
 class Grid
 {
     int size;
+    int score = 0;
     string top_bottom;
     string unoccupied = " ";
     string occupied = "o";
@@ -20,4 +21,5 @@ public:
     void draw(vector<vector<int>> body);
     void place_cherry(vector<vector<int>> body);
     void check_if_eaten(Snake &snake);
+    int get_score();
 };
