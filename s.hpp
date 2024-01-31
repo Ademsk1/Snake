@@ -14,7 +14,7 @@ public:
     vector<vector<int>> body;
     void change_direction(vector<int> new_direction);
     vector<vector<int>> get_body_position();
-    Snake(vector<int> starting_position, int gridsize);
+    Snake(int gridsize);
     void move();
     void checkwrap();
     void eat(int i, int j);

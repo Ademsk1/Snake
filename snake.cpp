@@ -19,11 +19,14 @@ bool Game()
 {
     string play_again;
     srand(time(NULL));
-    Grid grid = Grid(10);
     int difficulty;
-    Snake snake = Snake({3, 3}, 10);
-    grid.place_cherry(snake.body);
+    int game_size;
     cout << "Welcome to Snake!\n\n";
+    cout << "What size do you want the grid to be?: ";
+    cin >> game_size;
+    Grid grid = Grid(game_size);
+    Snake snake = Snake(game_size);
+    grid.place_cherry(snake.body);
     cout << "Input difficulty:\n(1) Easy\n(2) Normal \n(3) Hard\n";
     cin >> difficulty;
     int time_difficulty = 300 / difficulty;
@@ -43,6 +46,7 @@ bool Game()
     }
     system("cls");
     cout << "You Lost!\n\n Your score: " << grid.get_score() << "\n";
+    FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
     cout << "Would you like to play again? (y/n): ";
     cin >> play_again;
     cout << "\n";

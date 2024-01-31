@@ -2,9 +2,9 @@
 #include <iostream>
 #include <unordered_map>
 #include <windows.h>
-Snake::Snake(vector<int> starting_position, int gridsize) : gridsize(gridsize)
+Snake::Snake(int gridsize) : gridsize(gridsize)
 {
-    position = starting_position;
+    position = {gridsize / 2, gridsize / 2};
     body.push_back(position);
     body.push_back({position[0], position[0] - 1});
 };
