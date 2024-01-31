@@ -1,11 +1,17 @@
 #include "s.hpp"
 #include <iostream>
-Snake::Snake(vector<int> starting_position)
+#include <unordered_map>
+#include <windows.h>
+Snake::Snake(vector<int> starting_position, int gridsize) : gridsize(gridsize)
 {
     position = starting_position;
-    length = 2;
+    body.push_back(position);
+    body.push_back({position[0], position[0] - 1});
 };
 
+void Snake::eat()
+{
+}
 void Snake::change_direction(vector<int> new_direction)
 {
     if (direction[0] * new_direction[0] || direction[1] * new_direction[1])
@@ -14,23 +20,54 @@ void Snake::change_direction(vector<int> new_direction)
     }
     direction = new_direction;
 }
-
-vector<int> Snake::get_direction()
+vector<vector<int>> Snake::get_body_position()
 {
-    return direction;
+    return body;
 }
 
-vector<int> Snake::get_head_position()
+void Snake::move()
 {
-    return position;
+    for (int i = 1; i < body.size(); i++)
+    {
+        body[i][0] = body[i - 1][0] % gridsize;
+        body[i][1] = body[i - 1][1] % gridsize;
+    }
+
+    vector<int> &head = body[0];
+    checkwrap();
 }
 
-vector<int> Snake::move_head()
+void Snake::checkwrap()
 {
-    std::cout << "Old head position" << position[0] << ", " << position[1] << "\n";
-    std::cout << "Old head direction" << direction[0] << ", " << direction[1] << "\n";
-    position[0] += direction[0];
-    position[1] += direction[1];
+    vector<int> &head = body[0];
+    head[0] += direction[0];
+    head[1] += direction[1];
+    for (int &i : head)
+    {
+        if (i == gridsize)
+        {
+            i = 0;
+        }
+        else if (i == -1)
+        {
+            i = gridsize - 1;
+        }
+    }
+}
 
-    std::cout << "New head position: " << position[0] << ", " << position[1] << "\n";
+void Snake::check_user_input()
+{
+    vector<char> inputs = {'A', 'W', 'S', 'D'};
+    const unordered_map<char, vector<int>> kdm = {
+        {'A', {0, -1}},
+        {'S', {1, 0}},
+        {'W', {-1, 0}},
+        {'D', {0, 1}}};
+    for (auto &iter : kdm)
+    {
+        if (GetAsyncKeyState(iter.first))
+        {
+            direction = iter.second;
+        }
+    }
 }

@@ -1,26 +1,27 @@
 #include <vector>
-#include <chrono>
-#include <thread>
 #include "s.hpp"
 #include "grid.hpp"
 #include <iostream>
-#include <chrono>
-#include <thread>
+#include <windows.h>
+#include <time.h>
+
 using namespace std;
+
 int main()
 {
-
-    Snake snake = Snake({3, 3});
-    Grid grid = Grid(10, snake);
+    srand(time(NULL));
+    Grid grid = Grid(10);
+    Snake snake = Snake({3, 3}, 10);
     bool continue_game = true;
-
     while (continue_game)
     {
+
         grid.print_grid();
-        snake.move_head();
-        std::cout << snake.get_head_position()[0] << ", " << snake.get_head_position()[1] << "\n";
+        snake.check_user_input();
+        snake.move();
         grid.clear();
-        grid.draw(snake);
+        grid.draw(snake.body);
         grid.print_grid();
+        Sleep(1000);
     }
 }

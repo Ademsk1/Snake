@@ -1,20 +1,23 @@
-#include <vector>
 #ifndef SNAKE
 #define SNAKE
+#include <vector>
 
 using namespace std;
 class Snake
 {
-    vector<int> position = {0, 0}; // TODO:change to center
-    int length;
-    vector<vector<int>> body;
-    vector<int> direction = {0, 1}; // y,x
+    vector<int> position;
+    vector<int> direction = {1, 0}; // y,x
+    const int gridsize;
+    bool increase_size;
 
 public:
+    vector<vector<int>> body;
     void change_direction(vector<int> new_direction);
-    vector<int> get_direction();
-    vector<int> get_head_position();
-    Snake(vector<int> starting_position);
-    vector<int> move_head();
+    vector<vector<int>> get_body_position();
+    Snake(vector<int> starting_position, int gridsize);
+    void move();
+    void checkwrap();
+    void eat();
+    void check_user_input();
 };
 #endif

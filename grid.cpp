@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 
-Grid::Grid(int setSize, Snake &snake)
+Grid::Grid(int setSize)
 {
     size = setSize;
     grid.resize(size);
@@ -11,16 +11,26 @@ Grid::Grid(int setSize, Snake &snake)
     for (int i = 0; i < size; i++)
     {
         grid[i].resize(size);
+        fill(grid[i].begin(), grid[i].end(), unoccupied);
     }
-
-    vector<int> head = snake.get_head_position();
-    grid[head[0]][head[1]] = true;
+    place_cherry();
 }
 
-void Grid::draw(Snake &snake)
+void Grid::place_cherry()
 {
-    vector<int> head = snake.get_head_position();
-    grid[head[0]][head[1]] = true;
+    int &ir = icherry;
+    int &jr = jcherry;
+    ir = rand() % size;
+    jr = rand() % size;
+}
+
+void Grid::draw(vector<vector<int>> body)
+{
+    for (vector<int> cell : body)
+    {
+        grid[cell[0]][cell[1]] = occupied;
+    }
+    grid[icherry][jcherry] = cherry;
 }
 
 void Grid::clear()
@@ -29,7 +39,7 @@ void Grid::clear()
     {
         for (int j = 0; j < size; j++)
         {
-            grid[i][j] = 0;
+            grid[i][j] = unoccupied;
         }
     }
 }
