@@ -24,6 +24,6 @@ int main()
         grid.clear();
         grid.draw(snake.body);
         grid.print_grid();
-        Sleep(1000);
+        Sleep(500);
     }
 }
