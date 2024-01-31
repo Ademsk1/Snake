@@ -1,5 +1,5 @@
 # Snake
 
-Simple Snake game on CLI. WASD to move around.
+## : "WARNING: This game may potentially trigger seizures for people with photosensitive epilepsy. discretion is advised."
 
-Frame update is pretty horrible. Looking into GUI alternatives.
+Simple Snake game on CLI. Just run `snake.exe`. Windows only. Sorry.
