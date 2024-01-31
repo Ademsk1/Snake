@@ -5,8 +5,9 @@ using namespace std;
 class Grid
 {
     int size;
-    string unoccupied = "o";
-    string occupied = "s";
+    string top_bottom;
+    string unoccupied = " ";
+    string occupied = "o";
     string cherry = "x";
     vector<vector<string>> grid;
 
@@ -17,6 +18,6 @@ public:
     void print_grid();
     void clear();
     void draw(vector<vector<int>> body);
-    void place_cherry();
+    void place_cherry(vector<vector<int>> body);
     void check_if_eaten(Snake &snake);
 };
