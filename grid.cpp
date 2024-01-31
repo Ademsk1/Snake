@@ -33,6 +33,15 @@ void Grid::draw(vector<vector<int>> body)
     grid[icherry][jcherry] = cherry;
 }
 
+void Grid::check_if_eaten(Snake &snake)
+{
+    if (snake.body[0][0] == icherry & snake.body[0][1] == jcherry)
+    {
+        place_cherry();
+        snake.eat(icherry, jcherry);
+    }
+}
+
 void Grid::clear()
 {
     for (int i = 0; i < size; i++)

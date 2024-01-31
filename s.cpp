@@ -9,8 +9,9 @@ Snake::Snake(vector<int> starting_position, int gridsize) : gridsize(gridsize)
     body.push_back({position[0], position[0] - 1});
 };
 
-void Snake::eat()
+void Snake::eat(int i, int j)
 {
+    body.push_back({i, j});
 }
 void Snake::change_direction(vector<int> new_direction)
 {
@@ -25,9 +26,22 @@ vector<vector<int>> Snake::get_body_position()
     return body;
 }
 
-void Snake::move()
+bool Snake::eat_self()
 {
     for (int i = 1; i < body.size(); i++)
+    {
+        if (body[i][0] == body[0][0] && body[i][1] == body[0][1])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+void Snake::move()
+{
+
+    for (int i = body.size() - 1; i > 0; i--)
     {
         body[i][0] = body[i - 1][0] % gridsize;
         body[i][1] = body[i - 1][1] % gridsize;
@@ -67,7 +81,7 @@ void Snake::check_user_input()
     {
         if (GetAsyncKeyState(iter.first))
         {
-            direction = iter.second;
+            change_direction(iter.second);
         }
     }
 }

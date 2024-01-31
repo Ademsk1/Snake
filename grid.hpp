@@ -18,4 +18,5 @@ public:
     void clear();
     void draw(vector<vector<int>> body);
     void place_cherry();
+    void check_if_eaten(Snake &snake);
 };

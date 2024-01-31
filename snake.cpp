@@ -19,6 +19,8 @@ int main()
         grid.print_grid();
         snake.check_user_input();
         snake.move();
+        grid.check_if_eaten(snake);
+        continue_game = snake.eat_self();
         grid.clear();
         grid.draw(snake.body);
         grid.print_grid();

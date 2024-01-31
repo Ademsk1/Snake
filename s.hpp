@@ -17,7 +17,8 @@ public:
     Snake(vector<int> starting_position, int gridsize);
     void move();
     void checkwrap();
-    void eat();
+    void eat(int i, int j);
     void check_user_input();
+    bool eat_self();
 };
 #endif
